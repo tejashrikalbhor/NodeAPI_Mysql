@@ -18,10 +18,22 @@ con.connect(function (err) {
         console.log("Connected!");
     }
 });
-routes.get('/',async(req,res)=>{
-    return res.status(200).json({Message:"OK"});
-})
-routes.get('/student',async(req,res)=>{
+routes.get('/getStudentDetails',async(req,res)=>{
+    try{
+        const sql = `call GET_STUDENT_DETAILS()`;
+        con.query(sql,(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                console.log("result:",results[0].length)
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    }
+    catch(err){
+        return res.status(500).json({Error:err.Message()});
+    }
+});
+routes.get('/createStudent',async(req,res)=>{
 try{
     con.query('call SP_CREATE_TABLE()',(err,results,fields)=>{
         if(err)throw err;
@@ -60,6 +72,35 @@ routes.post('/addStudent',(req,res)=>{
     }
     catch(err){
         return res.status(500).json({Error:err.Message});
+    }
+});
+routes.put('/updateStudent/:id',async(req,res)=>{
+    try{
+        if(!req.body.NAME || !req.body.AGE){
+            return res.status(400).json({Error:"PLEASE ENTER THE CORRECT DETAILS."});
+        }
+        else{
+            const sql = `call SP_UPDATE_STUDENT(?,?,?)`;
+            con.query(sql,[req.params.id,req.body.NAME,req.body.AGE],(err,results,fields)=>{
+                if(err){
+                    return res.status(400).json({ErrorMessage:err});
+                }
+                else{
+                    return res.status(200).json({Result:results,Message:"STUDENT RECORD UPDATED SUCESSFULLY."})
+                }
+            })
+        }
+        }
+    catch(err){
+        return res.status(500).json({Error:err.Message()});
+    }
+});
+routes.delete('deleteStudent/:id',async(req,res)=>{
+    try{
+
+    }
+    catch(err){
+        return res.status(500).json({Error:err.Message()});
     }
 })
 module.exports ={routes}
