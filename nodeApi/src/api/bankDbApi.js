@@ -8,7 +8,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "Admin@123",
-    database:"MYSQL_DATABASE"
+    database:"API_CALLING_SP"
 });
 con.connect(function (err) {
     if (err) {
@@ -18,12 +18,12 @@ con.connect(function (err) {
         console.log("Connected!");
     }
 });
-bankDb.get('/db',async(req,res)=>{
+bankDb.get('/BANK_BRANCH',async(req,res)=>{
         try{
-            con.query('call SP_CALLING_ALL_CREATE_TABLES_SP()',(err,results,fields)=>{
+            con.query('call SP_CREATE_TABLE_BANK_BRANCH()',(err,results,fields)=>{
                 if(err)throw err;
                 else{
-                    return res.status(200).json({Message:"TABLE BANK_BRANCH CREATED SUCESSFULLY."});
+                    return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
                 }
             });  
         } 
@@ -32,4 +32,82 @@ bankDb.get('/db',async(req,res)=>{
         return res.status(500).json({Error:err.Message()});
     }
 });
+//
+bankDb.get('/EMPLOYEE',async(req,res)=>{
+    try{
+        con.query('call SP_CREATE_TABLE_EMPLOYEE()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/DEPARTMENT',async(req,res)=>{
+    try{
+        con.query('call SP_CREATE_TABLE_DEPARTMENT()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/CUSTOMER',async(req,res)=>{
+    try{
+        con.query('call SP_CREATE_TABLE_CUSTOMER()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/ACCOUNTS',async(req,res)=>{
+    try{
+        con.query('call SP_CREATE_TABLE_ACCOUNTS()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/TRANSACTION',async(req,res)=>{
+    try{
+        con.query('call SP_CREATE_TABLE_TRANSACTION()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Message:"TABLE CREATED SUCESSFULLY."});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//GET API
+
+
 module.exports ={bankDb}
