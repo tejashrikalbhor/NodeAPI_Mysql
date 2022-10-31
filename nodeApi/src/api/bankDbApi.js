@@ -19,17 +19,15 @@ con.connect(function (err) {
     }
 });
 bankDb.get('/db',async(req,res)=>{
-    try{
-        return res.status(200).json({Message:"ok"});
-        // const sql = `call GET_STUDENT_DETAILS()`;
-        // con.query(sql,(err,results,fields)=>{
-        //     if(err)throw err;
-        //     else{
-        //         console.log("result:",results[0].length)
-        //         return res.status(200).json({Result:results[0]});
-        //     }
-        // });  
-    }
+        try{
+            con.query('call SP_CREATE_TABLE_BANK_BRANCH()',(err,results,fields)=>{
+                if(err)throw err;
+                else{
+                    return res.status(200).json({Message:"TABLE BANK_BRANCH CREATED SUCESSFULLY."});
+                }
+            });  
+        } 
+    
     catch(err){
         return res.status(500).json({Error:err.Message()});
     }
