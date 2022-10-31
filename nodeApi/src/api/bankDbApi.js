@@ -108,6 +108,94 @@ catch(err){
 }
 });
 //GET API
+bankDb.get('/GETBANK_BRANCH',async(req,res)=>{
+        try{
+            con.query('call SP_GET_BANK_BRANCH()',(err,results,fields)=>{
+                if(err)throw err;
+                else{
+                    return res.status(200).json({});
+                }
+            });  
+        } 
+    
+    catch(err){
+        return res.status(500).json({Error:err.Message()});
+    }
+});
+//
+bankDb.get('/GETEMPLOYEE',async(req,res)=>{
+    try{
+        con.query('call SP_GET_EMPLOYEE()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    } 
 
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/GETDEPARTMENT',async(req,res)=>{
+    try{
+        con.query('call SP_GET_DEPARTMENT()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/GETCUSTOMER',async(req,res)=>{
+    try{
+        con.query('call SP_GET_CUSTOMER()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/GETACCOUNTS',async(req,res)=>{
+    try{
+        con.query('call SP_GET_ACCOUNTS()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
+//
+bankDb.get('/GETTRANSACTION',async(req,res)=>{
+    try{
+        con.query('call SP_GET_TRANSACTION()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({Result:results[0]});
+            }
+        });  
+    } 
+
+catch(err){
+    return res.status(500).json({Error:err.Message()});
+}
+});
 
 module.exports ={bankDb}
