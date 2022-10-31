@@ -20,7 +20,7 @@ con.connect(function (err) {
 });
 bankDb.get('/db',async(req,res)=>{
         try{
-            con.query('call SP_CREATE_TABLE_BANK_BRANCH()',(err,results,fields)=>{
+            con.query('call SP_CALLING_ALL_CREATE_TABLES_SP()',(err,results,fields)=>{
                 if(err)throw err;
                 else{
                     return res.status(200).json({Message:"TABLE BANK_BRANCH CREATED SUCESSFULLY."});
