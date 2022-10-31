@@ -1,0 +1,58 @@
+1.CREATED MYSQL NOTES.
+************************
+STORED PROCEDURE:
+************************
+1.API'S WHICH WILL CALL STORED PROCEDURE:
+
+DETAILS:
+FOLDER LOCATION: 
+	E:\MyProjectDetailsAtSiliconStack\NodeAPI_Mysql\nodeApi
+DATABASE:MYSQL_DATABASE
+API: GET ,POST ,PUT, DELETE 
+STORED PROCEDURE:
+	1.call GET_STUDENT_DETAILS()
+	2.call SP_CREATE_TABLE()
+	3.call SP_ADD_STUDENT(?,?)
+	4.call ID_EXIST(?)
+	5.call SP_UPDATE_STUDENT(?,?,?)
+	6.call ID_EXIST(?)
+	7.call DELETE_STUDENT_DATA(?)
+
+****************************************
+TRIGGERS
+****************************************
+DETAILS:
+DATABASE:MY_SQL_QUERRY
+TABLE:EMP
+TRIGGER OPERATION:
+	AFTER INSERT,UPDATE,DELETE
+TRIGGERS:
+	1.TRIGGER TR_AFTER_INSERT_EMP
+	2.TRIGGER TR_AFTER_INSERT_EMP_TABLE
+	3.TRIGGER TR_AFTER_DELETE_EMP_TABLE
+	4.TRIGGER TR_AFTER_UPDATE_EMP_TABLE
+	5.TRIGGER TR_BEFORE_INSERT_EMP_TABLE
+
+********************************************
+JOINS
+********************************************
+DETAILS:
+DATABASE:MYSQL_DATABASE
+TABLE:TEACHER TABLE,STUDENT
+JOINS:INNER, LEFT ,RIGHT
+LOCATION:
+E:\MyProjectDetailsAtSiliconStack\SQL_Querie_Practice\SQL_QUERRY\TEACHERDB.sql
+
+*******************************************
+2.MYSQL_QUERRIES:
+	E:\MyProjectDetailsAtSiliconStack\SQL_Querie_Practice\SQL_QUERRY\BANK_SYSTEM.sql
+****************************************
+DETAILS:
+DATABASE :BANK_SYSTEM
+TABLES:
+1.BANK_BRANCH
+2.EMPLOYEE
+3.DEPARTMENT
+4.CUSTOMER
+5.ACCOUNTS
+6.TRANSACTION 

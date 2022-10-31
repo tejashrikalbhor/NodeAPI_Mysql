@@ -50,7 +50,8 @@ routes.post('/addStudent',(req,res)=>{
     try{
         const NAME = req.body.NAME;
         const AGE = req.body.AGE;
-        if(!NAME || !AGE){
+        const TEACHER_ID = req.body.TEACHER_ID;
+        if(!NAME || !AGE || !TEACHER_ID){
             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
         }
         else{
@@ -110,8 +111,31 @@ routes.put('/updateStudent/:id',async(req,res)=>{
         return res.status(500).json({Error:err.Message()});
     }
 });
-routes.delete('deleteStudent/:id',async(req,res)=>{
+routes.delete('/deleteStudent/:id',async(req,res)=>{
     try{
+        const sql_query = `call ID_EXIST(?)`;
+        con.query(sql_query,[req.params.id],(err,results,fields)=>{
+            if(err){
+                return res.status(400).json({ErrorMessage:err});
+            }
+            else{
+                console.log("Result Length:",results[0].length);
+                if(results[0].length==0){
+                    return res.status(400).json({ErrorMessage:"ID DOES NOT EXIST."});
+                }
+                else{
+                    const sql  = `call DELETE_STUDENT_DATA(?)`;
+                    con.query(sql,[req.params.id],(err,results)=>{
+                         if(err){
+                          return res.status(400).json({ErrorMessage:err});
+                         }
+                         else{
+                            return res.status(200).json({Message:"STUDENT RECORD DELETED SUCESSFULLY."});
+                         }
+                } )
+                }
+            }
+            });
 
     }
     catch(err){
