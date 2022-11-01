@@ -429,5 +429,91 @@ bankDb.post('/ADDTRANSACTION',(req,res)=>{
     catch(err){
         return res.status(500).json({Error:err.message});
     }
-})
+});
+//  JOIN_BANK_BRANCH_ACCOUNTS
+bankDb.get('/GETDATA_BANK_BRANCH_ACCOUNTS',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_BANK_BRANCH_ACCOUNTS()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"INFORMATION ABOUT BANK_BRANCH AND ACCOUNTS TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//  JOIN_EMPLOYEE_DEPARTMENT
+bankDb.get('/GETDATA_EMPLOYEE_DEPARTMENT',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_EMPLOYEE_DEPARTMENT()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"INFORMATION ABOUT EMPLOYEE AND DEPARTMENT TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//  JOIN_EMPLOYEE_TRANSACTION
+bankDb.get('/GETDATA_EMPLOYEE_TRANSACTION',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_EMPLOYEE_TRANSACTION()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"INFORMATION ABOUT EMPLOYEE AND TRANSACTION TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//  JOIN_ACCOUNTS_CUSTOMER
+bankDb.get('/GETDATA_ACCOUNTS_CUSTOMER',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_ACCOUNTS_CUSTOMER()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"INFORMATION ABOUT ACCOUNTS AND CUSTOMER TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//  JOIN_BANK_BRANCH_ACCOUNTS_CUSTOMER
+bankDb.get('/GETDATA_BANK_BRANCH_ACCOUNTS_CUSTOMER',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_BANK_BRANCH_ACCOUNTS_CUSTOMER()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"INFORMATION ABOUT ACCOUNTS, CUSTOMER AND BANK_BRANCH TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//
+// // JOIN
+// bankDb.get('/GETDATA_BANK_BRANCH_ACCOUNTS',(req,res)=>{
+//     try{
+//         con.query('call SP_JOIN_ALL_TABLES()',(err,results,fields)=>{
+//             if(err)throw err;
+//             else{
+//                 return res.status(200).json({MESSAGE:"ALL INFORMATION ABOUT TABLES.",Result:results[0]});
+//             }
+//         }); 
+//     }
+//     catch(err){
+//         return res.status(500).json({Error:err.message});
+//     }
+// });
+// //
 module.exports ={bankDb}
