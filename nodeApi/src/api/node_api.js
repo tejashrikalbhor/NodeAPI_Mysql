@@ -76,34 +76,34 @@ routes.post('/addStudent',(req,res)=>{
     }
 });
 routes.put('/updateStudent/:id',async(req,res)=>{
-    try{
-        if(!req.body.NAME || !req.body.AGE){
-            return res.status(400).json({Error:"PLEASE ENTER THE CORRECT DETAILS."});
+    try {
+        if (!req.body.NAME || !req.body.AGE) {
+            return res.status(400).json({ Error: "PLEASE ENTER THE CORRECT DETAILS." });
         }
-                else{
-                    const sql_query = `call ID_EXIST(?)`;
-                    con.query(sql_query,[req.params.id],(err,results,fields)=>{
-                        if(err){
-                            return res.status(400).json({ErrorMessage:err});
-                        }
-                        else{
-                            console.log("Result Length:",results[0].length);
-                            if(results[0].length==0){
-                                return res.status(400).json({ErrorMessage:"ID DOES NOT EXIST."});
-                            }
-                            else{
-                                const sql = `call SP_UPDATE_STUDENT(?,?,?)`;
-                                con.query(sql,[req.params.id,req.body.NAME,req.body.AGE],(err,results)=>{
-                                     if(err){
-                                      return res.status(400).json({ErrorMessage:err});
-                                     }
-                                     else{
-                                        return res.status(200).json({Message:"STUDENT RECORD UPDATED SUCESSFULLY."});
-
-                                     }
-                            } )
-                        }
+        else {
+            const sql_query = `call ID_EXIST(?)`;
+            con.query(sql_query, [req.params.id], (err, results, fields) => {
+                if (err) {
+                    return res.status(400).json({ ErrorMessage: err });
+                }
+                else {
+                    console.log("Result Length:", results[0].length);
+                    if (results[0].length == 0) {
+                        return res.status(400).json({ ErrorMessage: "ID DOES NOT EXIST." });
                     }
+                    else {
+                        const sql = `call SP_UPDATE_STUDENT(?,?,?)`;
+                        con.query(sql, [req.params.id, req.body.NAME, req.body.AGE], (err, results) => {
+                            if (err) {
+                                return res.status(400).json({ ErrorMessage: err });
+                            }
+                            else {
+                                return res.status(200).json({ Message: "STUDENT RECORD UPDATED SUCESSFULLY." });
+
+                            }
+                        })
+                    }
+                }
                 });
             }
         }

@@ -267,25 +267,29 @@ bankDb.post('/ADDBANK_BRANCH',(req,res)=>{
 //
 bankDb.post('/ADDEMPLOYEE',(req,res)=>{
     try{
-        const NAME = req.body.NAME;
-        const AGE = req.body.AGE;
-        const TEACHER_ID = req.body.TEACHER_ID;
-        if(!NAME || !AGE || !TEACHER_ID){
-            return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
-        }
-        else{
-            console.log("inside else");
-            // con.query('call SP_ADD_STUDENT(name,age)',(err,results,fields)=>{
-                // let sql =`call SP_ADD_STUDENT(@NAME,@AGE)`;
-                let sql =`call SP_ADD_STUDENT(?,?)`;
-              con.query(sql,[ req.body.NAME, req.body.AGE],(err,results,fields)=>{
-                // con.query(sql,(err,results,fields)=>{
-                console.log("NAME",NAME);
+        const EMP_ID = req.body.EMP_ID;
+        const EMP_NAME = req.body.EMP_NAME;
+        const EMP_ADDRESS = req.body.EMP_ADDRESS;
+        const BRANCH_ID = req.body.BRANCH_ID;
+        const DEPARTMENT_ID = req.body.DEPARTMENT_ID;
+        const ACC_NO =  req.body.ACC_NO;
+         if(!EMP_ID || !EMP_NAME || !EMP_ADDRESS || !BRANCH_ID || !DEPARTMENT_ID ||!ACC_NO){
+             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
+         }
+         else {
+             let sql = `call SP_ADD_EMPLOYEE(?,?,?,?,?,?)`;
+             con.query(sql, [req.body.EMP_ID,
+             req.body.EMP_NAME,
+             req.body.EMP_ADDRESS,
+             req.body.BRANCH_ID,
+             req.body.DEPARTMENT_ID,
+             req.body.ACC_NO
+             ], (err, results, fields) => {
                 if(err) {
                     return res.status(400).json({ErrorMessage:err});
                 }
                 else{
-                    return res.status(200).json({Result:results,Message:"STUDENT RECORD ADDED SUCESSFULLY."});
+                    return res.status(200).json({Result:results,Message:"EMPLOYEE RECORD ADDED SUCESSFULLY."});
                 }
             })
         }
@@ -297,25 +301,25 @@ bankDb.post('/ADDEMPLOYEE',(req,res)=>{
 //
 bankDb.post('/ADDDEPARTMENT',(req,res)=>{
     try{
-        const NAME = req.body.NAME;
-        const AGE = req.body.AGE;
-        const TEACHER_ID = req.body.TEACHER_ID;
-        if(!NAME || !AGE || !TEACHER_ID){
-            return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
-        }
-        else{
-            console.log("inside else");
-            // con.query('call SP_ADD_STUDENT(name,age)',(err,results,fields)=>{
-                // let sql =`call SP_ADD_STUDENT(@NAME,@AGE)`;
-                let sql =`call SP_ADD_STUDENT(?,?)`;
-              con.query(sql,[ req.body.NAME, req.body.AGE],(err,results,fields)=>{
-                // con.query(sql,(err,results,fields)=>{
-                console.log("NAME",NAME);
+        const DEPARTMENT_ID = req.body.DEPARTMENT_ID;
+        const DEPARTMENT_NAME = req.body.DEPARTMENT_NAME;
+        const HEAD_OF_DEPARTMENT = req.body.HEAD_OF_DEPARTMENT;
+        const DESIGNATION = req.body.DESIGNATION;
+         if(!DEPARTMENT_ID || !DEPARTMENT_NAME || !HEAD_OF_DEPARTMENT || !DESIGNATION){
+             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
+         }
+         else {
+             let sql = `call SP_ADD_DEPARTMENT(?,?,?,?)`;
+             con.query(sql, [req.body.DEPARTMENT_ID,
+             req.body.DEPARTMENT_NAME,
+             req.body.HEAD_OF_DEPARTMENT,
+             req.body.DESIGNATION
+             ], (err, results, fields) => {
                 if(err) {
                     return res.status(400).json({ErrorMessage:err});
                 }
                 else{
-                    return res.status(200).json({Result:results,Message:"STUDENT RECORD ADDED SUCESSFULLY."});
+                    return res.status(200).json({Result:results,Message:"DEPARTMENT RECORD ADDED SUCESSFULLY."});
                 }
             })
         }
@@ -327,25 +331,28 @@ bankDb.post('/ADDDEPARTMENT',(req,res)=>{
 //
 bankDb.post('/ADDCUSTOMER',(req,res)=>{
     try{
-        const NAME = req.body.NAME;
-        const AGE = req.body.AGE;
-        const TEACHER_ID = req.body.TEACHER_ID;
-        if(!NAME || !AGE || !TEACHER_ID){
-            return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
-        }
-        else{
-            console.log("inside else");
-            // con.query('call SP_ADD_STUDENT(name,age)',(err,results,fields)=>{
-                // let sql =`call SP_ADD_STUDENT(@NAME,@AGE)`;
-                let sql =`call SP_ADD_STUDENT(?,?)`;
-              con.query(sql,[ req.body.NAME, req.body.AGE],(err,results,fields)=>{
-                // con.query(sql,(err,results,fields)=>{
-                console.log("NAME",NAME);
+        const CUSTOMER_ID = req.body.CUSTOMER_ID;
+        const CUSTOMER_NAME = req.body.CUSTOMER_NAME;
+        const CUSTOMER_ADDRESS = req.body.CUSTOMER_ADDRESS;
+        const BRANCH_ID = req.body.BRANCH_ID;
+        const ACC_NO =  req.body.ACC_NO;
+         if(!CUSTOMER_ID || !CUSTOMER_NAME || !CUSTOMER_ADDRESS || !BRANCH_ID || !ACC_NO){
+             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
+         }
+         else {
+             let sql = `call SP_ADD_CUSTOMER(?,?,?,?,?)`;
+             con.query(sql, [
+             req.body.CUSTOMER_ID,
+             req.body.CUSTOMER_NAME,
+             req.body.CUSTOMER_ADDRESS,
+             req.body.BRANCH_ID,
+             req.body.ACC_NO
+             ], (err, results, fields) => {
                 if(err) {
                     return res.status(400).json({ErrorMessage:err});
                 }
                 else{
-                    return res.status(200).json({Result:results,Message:"STUDENT RECORD ADDED SUCESSFULLY."});
+                    return res.status(200).json({Result:results,Message:"CUSTOMER RECORD ADDED SUCESSFULLY."});
                 }
             })
         }
@@ -357,25 +364,30 @@ bankDb.post('/ADDCUSTOMER',(req,res)=>{
 //
 bankDb.post('/ADDACCOUNTS',(req,res)=>{
     try{
-        const NAME = req.body.NAME;
-        const AGE = req.body.AGE;
-        const TEACHER_ID = req.body.TEACHER_ID;
-        if(!NAME || !AGE || !TEACHER_ID){
-            return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
-        }
-        else{
-            console.log("inside else");
-            // con.query('call SP_ADD_STUDENT(name,age)',(err,results,fields)=>{
-                // let sql =`call SP_ADD_STUDENT(@NAME,@AGE)`;
-                let sql =`call SP_ADD_STUDENT(?,?)`;
-              con.query(sql,[ req.body.NAME, req.body.AGE],(err,results,fields)=>{
-                // con.query(sql,(err,results,fields)=>{
-                console.log("NAME",NAME);
+        const ACC_NO =  req.body.ACC_NO;
+        const BRANCH_ID = req.body.BRANCH_ID;
+        const CUSTOMER_ID = req.body.CUSTOMER_ID;
+        const ACC_TYPE = req.body.ACC_TYPE;
+        const BALANCE = req.body.BALANCE;
+        const ACC_STATUS =  req.body.ACC_STATUS;
+         if(!ACC_NO || !BRANCH_ID || !CUSTOMER_ID || !ACC_TYPE || !BALANCE || !ACC_STATUS){
+             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
+         }
+         else {
+             let sql = `call SP_ADD_ACCOUNTS(?,?,?,?,?,?)`;
+             con.query(sql, [
+             req.body.ACC_NO,
+             req.body.BRANCH_ID,
+             req.body.CUSTOMER_ID,
+             req.body.ACC_TYPE,
+             req.body.BALANCE,
+             req.body.ACC_STATUS
+             ], (err, results, fields) => {
                 if(err) {
                     return res.status(400).json({ErrorMessage:err});
                 }
                 else{
-                    return res.status(200).json({Result:results,Message:"STUDENT RECORD ADDED SUCESSFULLY."});
+                    return res.status(200).json({Result:results,Message:"ACCOUNTS RECORD ADDED SUCESSFULLY."});
                 }
             })
         }
@@ -385,34 +397,37 @@ bankDb.post('/ADDACCOUNTS',(req,res)=>{
     }
 });
 //
-bankDb.post('/ADDTRANSACTION ',(req,res)=>{
+bankDb.post('/ADDTRANSACTION',(req,res)=>{
     try{
-        const NAME = req.body.NAME;
-        const AGE = req.body.AGE;
-        const TEACHER_ID = req.body.TEACHER_ID;
-        if(!NAME || !AGE || !TEACHER_ID){
-            return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
-        }
-        else{
-            console.log("inside else");
-            // con.query('call SP_ADD_STUDENT(name,age)',(err,results,fields)=>{
-                // let sql =`call SP_ADD_STUDENT(@NAME,@AGE)`;
-                let sql =`call SP_ADD_STUDENT(?,?)`;
-              con.query(sql,[ req.body.NAME, req.body.AGE],(err,results,fields)=>{
-                // con.query(sql,(err,results,fields)=>{
-                console.log("NAME",NAME);
+        const ACC_NO =  req.body.ACC_NO;
+        const DATE_TIME_STAMP =new Date();
+        const EMP_ID = req.body.EMP_ID;
+        const CREDIT_OR_DEPOSIT = req.body.CREDIT_OR_DEPOSIT;
+        const TRANSACTION_TYPE = req.body.TRANSACTION_TYPE;
+        
+         if(!ACC_NO || !EMP_ID || !CREDIT_OR_DEPOSIT ||!TRANSACTION_TYPE ){
+             return res.status(400).json({ErrorMessage : "PLEASE ENTER THE CORRECT DETAILS:"});
+         }
+         else {
+             let sql = `call SP_ADD_TRANSACTION(?,?,?,?,?)`;
+             con.query(sql, [
+             req.body.ACC_NO,
+             DATE_TIME_STAMP,
+             req.body.EMP_ID,
+             req.body.CREDIT_OR_DEPOSIT,
+             req.body.TRANSACTION_TYPE
+             ], (err, results, fields) => {
                 if(err) {
                     return res.status(400).json({ErrorMessage:err});
                 }
                 else{
-                    return res.status(200).json({Result:results,Message:"STUDENT RECORD ADDED SUCESSFULLY."});
+                    return res.status(200).json({Result:results,Message:"TRANSACTION RECORD ADDED SUCESSFULLY."});
                 }
             })
         }
     }
     catch(err){
-        return res.status(500).json({Error:err.Message});
+        return res.status(500).json({Error:err.message});
     }
-});
-
+})
 module.exports ={bankDb}
