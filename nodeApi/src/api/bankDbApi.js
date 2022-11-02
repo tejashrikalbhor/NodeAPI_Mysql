@@ -502,18 +502,18 @@ bankDb.get('/GETDATA_BANK_BRANCH_ACCOUNTS_CUSTOMER',(req,res)=>{
 });
 //
 // // JOIN
-// bankDb.get('/GETDATA_BANK_BRANCH_ACCOUNTS',(req,res)=>{
-//     try{
-//         con.query('call SP_JOIN_ALL_TABLES()',(err,results,fields)=>{
-//             if(err)throw err;
-//             else{
-//                 return res.status(200).json({MESSAGE:"ALL INFORMATION ABOUT TABLES.",Result:results[0]});
-//             }
-//         }); 
-//     }
-//     catch(err){
-//         return res.status(500).json({Error:err.message});
-//     }
-// });
-// //
+bankDb.get('/GETDATA',(req,res)=>{
+    try{
+        con.query('call SP_JOIN_ALL_TABLES()',(err,results,fields)=>{
+            if(err)throw err;
+            else{
+                return res.status(200).json({MESSAGE:"ALL INFORMATION ABOUT TABLES.",Result:results[0]});
+            }
+        }); 
+    }
+    catch(err){
+        return res.status(500).json({Error:err.message});
+    }
+});
+//
 module.exports ={bankDb}
